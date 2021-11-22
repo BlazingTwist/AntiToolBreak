@@ -3,7 +3,7 @@
 A Minecraft [Fabric](https://fabricmc.net/) mod stops you from breaking your tools.  
 Built for version 1.17.1
 
-[Curseforge release (TODO)]()
+[Curseforge release](https://www.curseforge.com/minecraft/mc-mods/anti-tool-break-fabric)
 
 # Dependencies
 
