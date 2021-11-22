@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "blazingtwist.antitoolbreak.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "MinecraftClient_Mixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

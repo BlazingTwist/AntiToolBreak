@@ -1,0 +1,17 @@
+{
+  "text.autoconfig.antitoolbreak.title": "Anti Tool Break Config",
+  "category.antitoolbreak": "Anti Tool Break",
+
+  "text.autoconfig.antitoolbreak.option.triggerDurability": "Durability below which ATB prevents tool usage",
+  "text.autoconfig.antitoolbreak.option.sneakToBypass": "Ignore durability when crouching",
+
+  "text.autoconfig.antitoolbreak.option.triggerFilter_noEnchant": "Tool without enchants",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_enchanted": "Tool with enchants",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_wood": "Wooden tools",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_stone": "Stone tools",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_iron": "Iron tools",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_gold": "Gold tools",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_diamond": "Diamond tools",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_netherite": "Netherite tools",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_other": "Other types of tools"
+}

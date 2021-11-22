@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "antitoolbreak",
+  "version": "${version}",
+
+  "name": "Anti Tool Break",
+  "description": "Stops you from using your precious tools before they break.",
+  "authors": [
+    "BlazingTwist"
+  ],
+  "contact": {
+    "homepage": "https://github.com/BlazingTwist",
+    "sources": "https://github.com/BlazingTwist/AntiToolBreak"
+  },
+
+  "license": "Apache-2.0",
+  "icon": "assets/antitoolbreak/icon128.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "blazingtwist.antitoolbreak.AntiToolBreak"
+    ],
+    "modmenu": [
+      "blazingtwist.antitoolbreak.AntiToolBreakModMenuImpl"
+    ]
+  },
+  "mixins": [
+    "antitoolbreak.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "fabric": "*"
+  },
+  "custom": {
+    "modmenu:clientsideOnly": true
+  }
+}
