@@ -78,7 +78,7 @@ public abstract class MinecraftClient_Mixin {
 	// private void handleBlockBreaking(boolean bl) {
 	@Inject(method = "handleBlockBreaking(Z)V", at = @At("HEAD"), cancellable = true)
 	public void onHandleBlockBreaking(boolean isBreakPressed, CallbackInfo info) {
-		if (isBreakPressed && shouldPreventUsage(player.getInventory().getMainHandStack())) {
+		if (isBreakPressed && shouldPreventUsage(player.inventory.getMainHandStack())) {
 			interactionManager.cancelBlockBreaking();
 			info.cancel();
 		}
@@ -87,7 +87,7 @@ public abstract class MinecraftClient_Mixin {
 	//private void doAttack() {
 	@Inject(method = "doAttack()V", at = @At("HEAD"), cancellable = true)
 	public void onDoAttack(CallbackInfo info) {
-		if (shouldPreventUsage(player.getInventory().getMainHandStack())) {
+		if (shouldPreventUsage(player.inventory.getMainHandStack())) {
 			info.cancel();
 		}
 	}
@@ -95,7 +95,7 @@ public abstract class MinecraftClient_Mixin {
 	//private void doItemUse() {
 	@Inject(method = "doItemUse()V", at = @At("HEAD"), cancellable = true)
 	public void onDoItemUse(CallbackInfo info) {
-		if (shouldPreventUsage(player.getInventory().getMainHandStack())) {
+		if (shouldPreventUsage(player.inventory.getMainHandStack())) {
 			info.cancel();
 		}
 	}
