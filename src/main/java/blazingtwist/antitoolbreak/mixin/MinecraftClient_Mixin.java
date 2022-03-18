@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
 @Mixin(MinecraftClient.class)
@@ -85,9 +86,10 @@ public abstract class MinecraftClient_Mixin {
 	}
 
 	//private void doAttack() {
-	@Inject(method = "doAttack()V", at = @At("HEAD"), cancellable = true)
-	public void onDoAttack(CallbackInfo info) {
+	@Inject(method = "doAttack()Z", at = @At("HEAD"), cancellable = true)
+	public void onDoAttack(CallbackInfoReturnable<Boolean> info) {
 		if (shouldPreventUsage(player.getInventory().getMainHandStack())) {
+			info.setReturnValue(false);
 			info.cancel();
 		}
 	}
