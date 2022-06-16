@@ -1,7 +1,7 @@
 # Anti Tool Break
 
 A Minecraft [Fabric](https://fabricmc.net/) mod stops you from breaking your tools.  
-Built for version 1.18.2
+Built for version 1.19.0
 
 [Curseforge release](https://www.curseforge.com/minecraft/mc-mods/anti-tool-break-fabric)
 
