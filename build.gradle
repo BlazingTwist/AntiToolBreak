@@ -7,7 +7,7 @@ sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
-version = project.mod_version
+version = project.mod_version + "+mc" + project.minecraft_version
 group = project.maven_group
 
 repositories {
@@ -67,7 +67,13 @@ jar {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			from components.java
+			// add all the jars that should be included when publishing to maven
+			artifact(remapJar) {
+				builtBy remapJar
+			}
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
 		}
 	}
 
