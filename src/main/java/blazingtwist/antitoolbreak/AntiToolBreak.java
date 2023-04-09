@@ -12,6 +12,7 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.util.ActionResult;
 
 public class AntiToolBreak implements ModInitializer {
 	private static final Item[] woodenItems = {
@@ -121,6 +122,11 @@ public class AntiToolBreak implements ModInitializer {
 		return lastCheckedStatus;
 	}
 
+	private static ActionResult resetMaterialCache(ConfigHolder<AntiToolBreakConfig> holder, AntiToolBreakConfig configInstance) {
+		setLastCheckedID(0, false);
+		return ActionResult.PASS;
+	}
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -130,5 +136,7 @@ public class AntiToolBreak implements ModInitializer {
 		AutoConfig.register(AntiToolBreakConfig.class, GsonConfigSerializer::new);
 
 		configHolder = AutoConfig.getConfigHolder(AntiToolBreakConfig.class);
+		configHolder.registerSaveListener(AntiToolBreak::resetMaterialCache);
+		configHolder.registerLoadListener(AntiToolBreak::resetMaterialCache);
 	}
 }
