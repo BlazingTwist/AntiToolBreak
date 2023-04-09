@@ -4,6 +4,7 @@ import blazingtwist.antitoolbreak.config.AntiToolBreakConfig;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
@@ -70,7 +71,24 @@ public class AntiToolBreak implements ModInitializer {
 		return configHolder.getConfig();
 	}
 
-	public static HashMap<ATB_ToolMaterial, List<Integer>> getMaterialRawIDs() {
+	/**
+	 * Caches the outcome of AntiToolBreakConfig::isMaterialProtected.
+	 *
+	 * @param config config-instance
+	 * @param item   the item whose material should be checked
+	 * @return true if ATB is configured to protect the given Item Material
+	 */
+	public static boolean isItemMaterialProtected(AntiToolBreakConfig config, Item item) {
+		int rawId = Item.getRawId(item);
+		if (!isLastCheckedID(rawId)) {
+			ATB_ToolMaterial itemMaterial = AntiToolBreak.findItemMaterial(rawId);
+			boolean materialProtected = config.isMaterialProtected(itemMaterial);
+			AntiToolBreak.setLastCheckedID(rawId, materialProtected);
+		}
+		return getLastCheckedStatus();
+	}
+
+	private static HashMap<ATB_ToolMaterial, List<Integer>> getMaterialRawIDs() {
 		if (materialRawIDs == null) {
 			materialRawIDs = new HashMap<>();
 			materialRawIDs.put(ATB_ToolMaterial.Wood, Arrays.stream(woodenItems).map(Item::getRawId).collect(Collectors.toList()));
@@ -83,16 +101,23 @@ public class AntiToolBreak implements ModInitializer {
 		return materialRawIDs;
 	}
 
-	public static void setLastCheckedID(int rawID, boolean status) {
+	private static ATB_ToolMaterial findItemMaterial(int rawID) {
+		return AntiToolBreak.getMaterialRawIDs().entrySet().stream()
+				.filter(materialEntry -> materialEntry.getValue().contains(rawID))
+				.findFirst()
+				.map(Map.Entry::getKey).orElse(null);
+	}
+
+	private static void setLastCheckedID(int rawID, boolean status) {
 		lastCheckedID = rawID;
 		lastCheckedStatus = status;
 	}
 
-	public static boolean isLastCheckedID(int rawID){
+	private static boolean isLastCheckedID(int rawID) {
 		return lastCheckedID >= 0 && lastCheckedID == rawID;
 	}
 
-	public static boolean getLastCheckedStatus(int rawID){
+	private static boolean getLastCheckedStatus() {
 		return lastCheckedStatus;
 	}
 

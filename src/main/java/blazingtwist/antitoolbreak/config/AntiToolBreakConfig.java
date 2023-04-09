@@ -1,5 +1,6 @@
 package blazingtwist.antitoolbreak.config;
 
+import blazingtwist.antitoolbreak.ATB_ToolMaterial;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
@@ -31,4 +32,14 @@ public class AntiToolBreakConfig implements ConfigData {
 
 	@ConfigEntry.Category("category.antitoolbreak")
 	public boolean triggerFilter_other = false;
+
+	public boolean isMaterialProtected(ATB_ToolMaterial material) {
+		return triggerFilter_other && material == null
+				|| triggerFilter_wood && material == ATB_ToolMaterial.Wood
+				|| triggerFilter_stone && material == ATB_ToolMaterial.Stone
+				|| triggerFilter_iron && material == ATB_ToolMaterial.Iron
+				|| triggerFilter_gold && material == ATB_ToolMaterial.Gold
+				|| triggerFilter_diamond && material == ATB_ToolMaterial.Diamond
+				|| triggerFilter_netherite && material == ATB_ToolMaterial.Netherite;
+	}
 }

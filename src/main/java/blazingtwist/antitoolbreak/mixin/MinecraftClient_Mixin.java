@@ -1,16 +1,12 @@
 package blazingtwist.antitoolbreak.mixin;
 
-import blazingtwist.antitoolbreak.ATB_ToolMaterial;
 import blazingtwist.antitoolbreak.AntiToolBreak;
 import blazingtwist.antitoolbreak.config.AntiToolBreakConfig;
-import java.util.List;
-import java.util.Map;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -49,31 +45,7 @@ public abstract class MinecraftClient_Mixin {
 			return true;
 		}
 
-		int rawId = Item.getRawId(itemStack.getItem());
-		boolean materialMatch;
-		// Try to do material checking only once
-		if(!AntiToolBreak.isLastCheckedID(rawId)){
-			ATB_ToolMaterial material = null;
-			for (Map.Entry<ATB_ToolMaterial, List<Integer>> materialEntry : AntiToolBreak.getMaterialRawIDs().entrySet()) {
-				if(materialEntry.getValue().contains(rawId)){
-					material = materialEntry.getKey();
-					break;
-				}
-			}
-
-			materialMatch = config.triggerFilter_other && material == null
-					|| config.triggerFilter_wood && material == ATB_ToolMaterial.Wood
-					|| config.triggerFilter_stone && material == ATB_ToolMaterial.Stone
-					|| config.triggerFilter_iron && material == ATB_ToolMaterial.Iron
-					|| config.triggerFilter_gold && material == ATB_ToolMaterial.Gold
-					|| config.triggerFilter_diamond && material == ATB_ToolMaterial.Diamond
-					|| config.triggerFilter_netherite && material == ATB_ToolMaterial.Netherite;
-			AntiToolBreak.setLastCheckedID(rawId, materialMatch);
-		}else{
-			materialMatch = AntiToolBreak.getLastCheckedStatus(rawId);
-		}
-
-		return materialMatch;
+		return AntiToolBreak.isItemMaterialProtected(config, itemStack.getItem());
 	}
 
 	// private void handleBlockBreaking(boolean bl) {
