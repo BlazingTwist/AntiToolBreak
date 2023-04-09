@@ -9,6 +9,8 @@ Built for version 1.19.0
 
 Requires [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api), [Cloth Config](https://www.curseforge.com/minecraft/mc-mods/cloth-config) and optionally [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu)
 
+For easy installation, check the [supported versions](https://github.com/BlazingTwist/AntiToolBreak/wiki/Tested-Versions).
+
 # Configuration
 The configuration allows you to adjust the following options:
 * Min-Durability to start preventing tool usage
