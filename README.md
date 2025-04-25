@@ -4,6 +4,7 @@ A Minecraft [Fabric](https://fabricmc.net/) mod stops you from breaking your too
 Built for version 1.21.2
 
 [Curseforge release](https://www.curseforge.com/minecraft/mc-mods/anti-tool-break-fabric)
+[Modrinth release](https://modrinth.com/mod/anti-tool-break)
 
 # Dependencies
 
