@@ -26,14 +26,17 @@
     ]
   },
   "mixins": [
-    "antitoolbreak.mixins.json"
+    {
+      "config": "antitoolbreak.mixins.json",
+      "environment": "client"
+    }
   ],
 
   "depends": {
-    "fabricloader": ">=0.16.7",
+    "fabricloader": ">=0.16.14",
     "fabric": "*",
-    "minecraft": "~1.21.2",
-    "java": ">=17"
+    "minecraft": "~1.21.8",
+    "java": ">=21"
   },
   "suggests": {
     "fabric": "*"

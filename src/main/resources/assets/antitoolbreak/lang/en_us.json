@@ -9,6 +9,7 @@
   "text.autoconfig.antitoolbreak.option.triggerFilter_enchanted": "Tool with enchants",
   "text.autoconfig.antitoolbreak.option.triggerFilter_wood": "Wooden tools",
   "text.autoconfig.antitoolbreak.option.triggerFilter_stone": "Stone tools",
+  "text.autoconfig.antitoolbreak.option.triggerFilter_copper": "Copper tools",
   "text.autoconfig.antitoolbreak.option.triggerFilter_iron": "Iron tools",
   "text.autoconfig.antitoolbreak.option.triggerFilter_gold": "Gold tools",
   "text.autoconfig.antitoolbreak.option.triggerFilter_diamond": "Diamond tools",
