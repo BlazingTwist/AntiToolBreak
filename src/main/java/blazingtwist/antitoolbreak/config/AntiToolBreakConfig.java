@@ -22,6 +22,8 @@ public class AntiToolBreakConfig implements ConfigData {
 	@ConfigEntry.Category("category.antitoolbreak")
 	public boolean triggerFilter_stone = false;
 	@ConfigEntry.Category("category.antitoolbreak")
+	public boolean triggerFilter_copper = false;
+	@ConfigEntry.Category("category.antitoolbreak")
 	public boolean triggerFilter_iron = false;
 	@ConfigEntry.Category("category.antitoolbreak")
 	public boolean triggerFilter_gold = true;
@@ -34,12 +36,18 @@ public class AntiToolBreakConfig implements ConfigData {
 	public boolean triggerFilter_other = false;
 
 	public boolean isMaterialProtected(ATB_ToolMaterial material) {
-		return triggerFilter_other && material == null
-				|| triggerFilter_wood && material == ATB_ToolMaterial.Wood
-				|| triggerFilter_stone && material == ATB_ToolMaterial.Stone
-				|| triggerFilter_iron && material == ATB_ToolMaterial.Iron
-				|| triggerFilter_gold && material == ATB_ToolMaterial.Gold
-				|| triggerFilter_diamond && material == ATB_ToolMaterial.Diamond
-				|| triggerFilter_netherite && material == ATB_ToolMaterial.Netherite;
+		if (material == null) {
+			return triggerFilter_other;
+		}
+
+		return switch (material) {
+			case Wood -> triggerFilter_wood;
+			case Stone -> triggerFilter_stone;
+			case Copper -> triggerFilter_copper;
+			case Iron -> triggerFilter_iron;
+			case Gold -> triggerFilter_gold;
+			case Diamond -> triggerFilter_diamond;
+			case Netherite -> triggerFilter_netherite;
+		};
 	}
 }

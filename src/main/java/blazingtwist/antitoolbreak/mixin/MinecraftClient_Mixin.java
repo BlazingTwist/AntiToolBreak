@@ -10,6 +10,7 @@ import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -25,6 +26,7 @@ public abstract class MinecraftClient_Mixin {
 	@Shadow
 	public ClientPlayerEntity player;
 
+	@Unique
 	private boolean shouldPreventUsage(ItemStack itemStack) {
 		AntiToolBreakConfig config = AntiToolBreak.getConfig();
 		if (config.sneakToBypass && player.isSneaking()) {
@@ -51,7 +53,7 @@ public abstract class MinecraftClient_Mixin {
 	// private void handleBlockBreaking(boolean bl) {
 	@Inject(method = "handleBlockBreaking(Z)V", at = @At("HEAD"), cancellable = true)
 	public void onHandleBlockBreaking(boolean isBreakPressed, CallbackInfo info) {
-		if (isBreakPressed && shouldPreventUsage(player.getInventory().getMainHandStack())) {
+		if (isBreakPressed && shouldPreventUsage(player.getInventory().getSelectedStack())) {
 			interactionManager.cancelBlockBreaking();
 			info.cancel();
 		}
@@ -60,7 +62,7 @@ public abstract class MinecraftClient_Mixin {
 	//private void doAttack() {
 	@Inject(method = "doAttack()Z", at = @At("HEAD"), cancellable = true)
 	public void onDoAttack(CallbackInfoReturnable<Boolean> info) {
-		if (shouldPreventUsage(player.getInventory().getMainHandStack())) {
+		if (shouldPreventUsage(player.getInventory().getSelectedStack())) {
 			info.setReturnValue(false);
 			info.cancel();
 		}
@@ -69,7 +71,7 @@ public abstract class MinecraftClient_Mixin {
 	//private void doItemUse() {
 	@Inject(method = "doItemUse()V", at = @At("HEAD"), cancellable = true)
 	public void onDoItemUse(CallbackInfo info) {
-		if (shouldPreventUsage(player.getInventory().getMainHandStack())) {
+		if (shouldPreventUsage(player.getInventory().getSelectedStack())) {
 			info.cancel();
 		}
 	}

@@ -31,6 +31,14 @@ public class AntiToolBreak implements ModInitializer {
 			Items.STONE_SWORD
 	};
 
+	private static final Item[] copperItems = {
+			Items.COPPER_AXE,
+			Items.COPPER_HOE,
+			Items.COPPER_PICKAXE,
+			Items.COPPER_SHOVEL,
+			Items.COPPER_SWORD
+	};
+
 	private static final Item[] ironItems = {
 			Items.IRON_AXE,
 			Items.IRON_HOE,
@@ -94,6 +102,7 @@ public class AntiToolBreak implements ModInitializer {
 			materialRawIDs = new HashMap<>();
 			materialRawIDs.put(ATB_ToolMaterial.Wood, Arrays.stream(woodenItems).map(Item::getRawId).collect(Collectors.toList()));
 			materialRawIDs.put(ATB_ToolMaterial.Stone, Arrays.stream(stoneItems).map(Item::getRawId).collect(Collectors.toList()));
+			materialRawIDs.put(ATB_ToolMaterial.Copper, Arrays.stream(copperItems).map(Item::getRawId).collect(Collectors.toList()));
 			materialRawIDs.put(ATB_ToolMaterial.Iron, Arrays.stream(ironItems).map(Item::getRawId).collect(Collectors.toList()));
 			materialRawIDs.put(ATB_ToolMaterial.Gold, Arrays.stream(goldItems).map(Item::getRawId).collect(Collectors.toList()));
 			materialRawIDs.put(ATB_ToolMaterial.Diamond, Arrays.stream(diamondItems).map(Item::getRawId).collect(Collectors.toList()));
