@@ -31,3 +31,6 @@ bin/
 # fabric
 
 run/
+
+# release-scripts
+/_scripts/
