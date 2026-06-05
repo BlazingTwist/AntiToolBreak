@@ -10,9 +10,9 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.ActionResult;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 public class AntiToolBreak implements ModInitializer {
 	private static final Item[] woodenItems = {
@@ -88,7 +88,7 @@ public class AntiToolBreak implements ModInitializer {
 	 * @return true if ATB is configured to protect the given Item Material
 	 */
 	public static boolean isItemMaterialProtected(AntiToolBreakConfig config, Item item) {
-		int rawId = Item.getRawId(item);
+		int rawId = Item.getId(item);
 		if (!isLastCheckedID(rawId)) {
 			ATB_ToolMaterial itemMaterial = AntiToolBreak.findItemMaterial(rawId);
 			boolean materialProtected = config.isMaterialProtected(itemMaterial);
@@ -100,13 +100,13 @@ public class AntiToolBreak implements ModInitializer {
 	private static HashMap<ATB_ToolMaterial, List<Integer>> getMaterialRawIDs() {
 		if (materialRawIDs == null) {
 			materialRawIDs = new HashMap<>();
-			materialRawIDs.put(ATB_ToolMaterial.Wood, Arrays.stream(woodenItems).map(Item::getRawId).collect(Collectors.toList()));
-			materialRawIDs.put(ATB_ToolMaterial.Stone, Arrays.stream(stoneItems).map(Item::getRawId).collect(Collectors.toList()));
-			materialRawIDs.put(ATB_ToolMaterial.Copper, Arrays.stream(copperItems).map(Item::getRawId).collect(Collectors.toList()));
-			materialRawIDs.put(ATB_ToolMaterial.Iron, Arrays.stream(ironItems).map(Item::getRawId).collect(Collectors.toList()));
-			materialRawIDs.put(ATB_ToolMaterial.Gold, Arrays.stream(goldItems).map(Item::getRawId).collect(Collectors.toList()));
-			materialRawIDs.put(ATB_ToolMaterial.Diamond, Arrays.stream(diamondItems).map(Item::getRawId).collect(Collectors.toList()));
-			materialRawIDs.put(ATB_ToolMaterial.Netherite, Arrays.stream(netheriteItems).map(Item::getRawId).collect(Collectors.toList()));
+			materialRawIDs.put(ATB_ToolMaterial.Wood, Arrays.stream(woodenItems).map(Item::getId).collect(Collectors.toList()));
+			materialRawIDs.put(ATB_ToolMaterial.Stone, Arrays.stream(stoneItems).map(Item::getId).collect(Collectors.toList()));
+			materialRawIDs.put(ATB_ToolMaterial.Copper, Arrays.stream(copperItems).map(Item::getId).collect(Collectors.toList()));
+			materialRawIDs.put(ATB_ToolMaterial.Iron, Arrays.stream(ironItems).map(Item::getId).collect(Collectors.toList()));
+			materialRawIDs.put(ATB_ToolMaterial.Gold, Arrays.stream(goldItems).map(Item::getId).collect(Collectors.toList()));
+			materialRawIDs.put(ATB_ToolMaterial.Diamond, Arrays.stream(diamondItems).map(Item::getId).collect(Collectors.toList()));
+			materialRawIDs.put(ATB_ToolMaterial.Netherite, Arrays.stream(netheriteItems).map(Item::getId).collect(Collectors.toList()));
 		}
 		return materialRawIDs;
 	}
@@ -131,9 +131,9 @@ public class AntiToolBreak implements ModInitializer {
 		return lastCheckedStatus;
 	}
 
-	private static ActionResult resetMaterialCache(ConfigHolder<AntiToolBreakConfig> holder, AntiToolBreakConfig configInstance) {
+	private static InteractionResult resetMaterialCache(ConfigHolder<AntiToolBreakConfig> holder, AntiToolBreakConfig configInstance) {
 		setLastCheckedID(0, false);
-		return ActionResult.PASS;
+		return InteractionResult.PASS;
 	}
 
 	@Override
